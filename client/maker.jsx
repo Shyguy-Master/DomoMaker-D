@@ -8,13 +8,14 @@ const handleDomo = (e) => {
 
     const name = e.target.querySelector('#domoName').value;
     const age = e.target.querySelector('#domoAge').value;
+    const gender = e.target.querySelector('#domoGender').value;
 
-    if (!name || !age) {
+    if (!name || !age || !gender) {
         helper.handleError('All fields are required!');
         return false;
     }
 
-    helper.sendPost(e.target.action, {name, age}, loadDomosFromServer);
+    helper.sendPost(e.target.action, {name, age, gender}, loadDomosFromServer);
 
     return false;
 };
@@ -26,9 +27,14 @@ const DomoForm = (props) => {
             <input id="domoName" type="text" name="name" placeholder="Domo Name" />
             <label htmlFor="age">Age: </label>
             <input id="domoAge" type="number" name="age" />
+            <label htmlFor="gender">Gender: </label>
+            <input id="domoGender" type="text" name="gender" />
             <input className="makeDomoSubmit" type="submit" value="Make Domo" />
         </form>
     );
+};
+
+const deleteDomo = () => {
 };
 
 const DomoList = (props) => {
@@ -46,6 +52,8 @@ const DomoList = (props) => {
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
                 <h3 className="domoName">Name: {domo.name} </h3>
                 <h3 className="domoAge">Age: {domo.age} </h3>
+                <h3 className="domoGender">Gender: {domo.gender} </h3>
+                {/* <input type="button" onclick={deleteDomo} method="DELETE" value="Delete Domo" /> */}
             </div>
         );
     });
