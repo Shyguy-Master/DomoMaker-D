@@ -271,6 +271,25 @@ h3.domoGender {
     font-size: 1.5em;
 }
 
+.domo .deleteDomoButton {
+    transition: background-color 0.4s ease;
+    display: inline;
+    width: 90px;
+    background-color: #55acee;
+    border-radius: 2px;
+    color: white;
+    text-decoration: none;
+}
+
+.domo .deleteDomoButton:link, .domo .deleteDomoButton:visited, .domo .deleteDomoButton:hover, .domo .deleteDomoButton:active {
+    color: white;
+}
+
+.domo .deleteDomoButton:hover {
+    transition: background-color 0.4s ease;
+    background-color: #338acc;
+}
+
 .domo:first-child {
     margin-top: 10px;
 }

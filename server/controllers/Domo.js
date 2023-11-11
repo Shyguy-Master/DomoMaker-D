@@ -43,18 +43,21 @@ const getDomos = async (req, res) => {
   }
 };
 
-// const deleteDomo = (req, res) => {
-//   try {
-//     /* CODE GOES HERE */ 
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(404).json({ error: 'Domo doesn\'t exist!' });
-//   }
-// };
+const deleteDomo = async (req, res) => {
+  try {
+    const query = { owner: req.session.account._id };
+    const docs = await Domo.find(query).findOneAndDelete({ name: req.body.name, age: req.body.age, gender: req.body.gender });
+    //await docs.save();
+    return res.status(201);
+  } catch (err) {
+    console.log(err);
+    return res.status(404).json({ error: 'Domo doesn\'t exist!' });
+  }
+};
 
 module.exports = {
   makerPage,
   makeDomo,
   getDomos,
-  // deleteDomo,
+  deleteDomo,
 };

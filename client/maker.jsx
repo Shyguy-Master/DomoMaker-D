@@ -1,3 +1,4 @@
+const { query } = require('express');
 const helper = require('./helper.js');
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -34,7 +35,19 @@ const DomoForm = (props) => {
     );
 };
 
-const deleteDomo = () => {
+const deleteDomo = (e) => {
+    console.log("It's running");
+
+    // e.preventDefault();
+    helper.hideError();
+
+    const name = e.target.querySelector('div.domoName').innerHTML;
+    const age = e.target.querySelector('div.domoAge').innerHTML;
+    const gender = e.target.querySelector('div.domoGender').innerHTML;
+
+    helper.sendPost(e.target.action, {name, age, gender}, loadDomosFromServer);
+
+    return false;
 };
 
 const DomoList = (props) => {
@@ -53,8 +66,15 @@ const DomoList = (props) => {
                 <h3 className="domoName">Name: {domo.name} </h3>
                 <h3 className="domoAge">Age: {domo.age} </h3>
                 <h3 className="domoGender">Gender: {domo.gender} </h3>
-                {/* <input type="button" onclick={deleteDomo} method="DELETE" value="Delete Domo" /> */}
+                <input type="button" onClick={deleteDomo} action="/deleteDomo" method="DELETE" value="Delete Domo" className="deleteDomoButton" />
             </div>
+            // <form onSubmit={deleteDomo} key={domo._id} action="/deleteDomo" method="DELETE" className="domo">
+            //     <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
+            //     <h3 className="domoName">Name: {domo.name} </h3>
+            //     <h3 className="domoAge">Age: {domo.age} </h3>
+            //     <h3 className="domoGender">Gender: {domo.gender} </h3>
+            //     <input className="deleteDomoButton" type="submit" value="Delete Domo" />
+            // </form>
         );
     });
 
