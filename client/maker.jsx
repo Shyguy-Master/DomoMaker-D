@@ -1,4 +1,3 @@
-const { query } = require('express');
 const helper = require('./helper.js');
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -36,16 +35,14 @@ const DomoForm = (props) => {
 };
 
 const deleteDomo = (e) => {
-    console.log("It's running");
-
-    // e.preventDefault();
+    e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('div.domoName').innerHTML;
-    const age = e.target.querySelector('div.domoAge').innerHTML;
-    const gender = e.target.querySelector('div.domoGender').innerHTML;
+    const name = e.target.parentNode.querySelector('h3.domoName').innerHTML.substring(6);
+    const age = e.target.parentNode.querySelector('h3.domoAge').innerHTML.substring(5);
+    const gender = e.target.parentNode.querySelector('h3.domoGender').innerHTML.substring(8);
 
-    helper.sendPost(e.target.action, {name, age, gender}, loadDomosFromServer);
+    helper.sendDelete("/deleteDomo", {name, age, gender}, loadDomosFromServer);
 
     return false;
 };
@@ -63,18 +60,12 @@ const DomoList = (props) => {
         return (
             <div key={domo._id} className="domo">
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName">Name: {domo.name} </h3>
-                <h3 className="domoAge">Age: {domo.age} </h3>
-                <h3 className="domoGender">Gender: {domo.gender} </h3>
                 <input type="button" onClick={deleteDomo} action="/deleteDomo" method="DELETE" value="Delete Domo" className="deleteDomoButton" />
+                <h3 class="domoName" className="domoName">Name: {domo.name} </h3>
+                <h3 class="domoAge" className="domoAge">Age: {domo.age} </h3>
+                <h3 class="domoGender" className="domoGender">Gender: {domo.gender} </h3>
             </div>
-            // <form onSubmit={deleteDomo} key={domo._id} action="/deleteDomo" method="DELETE" className="domo">
-            //     <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-            //     <h3 className="domoName">Name: {domo.name} </h3>
-            //     <h3 className="domoAge">Age: {domo.age} </h3>
-            //     <h3 className="domoGender">Gender: {domo.gender} </h3>
-            //     <input className="deleteDomoButton" type="submit" value="Delete Domo" />
-            // </form>
+            //<div id="domoListLeftSide"></div>
         );
     });
 

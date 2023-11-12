@@ -50,7 +50,6 @@ nav:nth-child(1) {
 .domoForm {
     border: 2px solid #338acc;
     height: 35px;
-    /* width: 700px; */
     width: 1000px;
     margin-top:0px;
     padding-top:10px;
@@ -61,17 +60,12 @@ nav:nth-child(1) {
 
 .domoForm label {
     display: inline-block;
-    /* width: 75px; */
     width: 100px;
     margin-left: 10px;
     font-size: 1.2em;
     float: left;
     color: white;
 }
-
-/* .domoForm input[type=text] {
-    float:left;
-} */
 
 .domoForm input {
     float:left;
@@ -218,6 +212,12 @@ nav:nth-child(1) {
     padding: 10px;
     min-height:60px;
     overflow: hidden;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "image name age gender"
+        "delete name age gender";
 }
 
 .domo:hover {
@@ -235,6 +235,7 @@ img.domoFace {
     border-radius: 4px;
     margin-top:10px;
     float:left;
+    grid-area: image;
 }
 
 h3.emptyDomo {
@@ -249,8 +250,10 @@ h3.domoName {
     float:left;
     width: 200px;
     font-weight: bold;
+    margin: 24px auto 0 auto;
     padding-left: 65px;
     font-size: 1.5em;
+    grid-area: name;
 }
 
 h3.domoAge {
@@ -258,27 +261,33 @@ h3.domoAge {
     text-align: left;
     width: 100px;
     font-weight: bold;
+    margin: 24px auto 0 auto;
     padding-right: 40px;
     font-size: 1.5em;
+    grid-area: age;
 }
 
 h3.domoGender {
     float:right;
     text-align: left;
-    width: 150px;
+    width: 210px;
     font-weight: bold;
-    padding-right: 40px;
+    margin: 24px auto 0 auto;
+    padding-right: 0px;
     font-size: 1.5em;
+    grid-area: gender;
 }
 
 .domo .deleteDomoButton {
     transition: background-color 0.4s ease;
     display: inline;
-    width: 90px;
     background-color: #55acee;
-    border-radius: 2px;
+    border: 2px solid white;
     color: white;
     text-decoration: none;
+    margin-left: 5px;
+    float:left;
+    grid-area: delete;
 }
 
 .domo .deleteDomoButton:link, .domo .deleteDomoButton:visited, .domo .deleteDomoButton:hover, .domo .deleteDomoButton:active {
