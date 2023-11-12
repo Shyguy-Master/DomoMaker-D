@@ -2,9 +2,7 @@ const models = require('../models');
 
 const { Domo } = models;
 
-const makerPage = (req, res) => {
-  return res.render('app');
-};
+const makerPage = (req, res) => res.render('app');
 
 const makeDomo = async (req, res) => {
   if (!req.body.name || !req.body.age || !req.body.gender) {
@@ -36,7 +34,7 @@ const getDomos = async (req, res) => {
     const query = { owner: req.session.account._id };
     const docs = await Domo.find(query).select('name age gender').lean().exec();
 
-    return res.json({domos: docs});
+    return res.json({ domos: docs });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving domos!' });
@@ -46,8 +44,10 @@ const getDomos = async (req, res) => {
 const deleteDomo = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Domo.find(query).findOneAndDelete({ name: req.body.name, age: req.body.age, gender: req.body.gender });
-    return res.json({domos: docs});
+    const docs = await Domo.find(query).findOneAndDelete(
+      { name: req.body.name, age: req.body.age, gender: req.body.gender },
+    );
+    return res.json({ domos: docs });
   } catch (err) {
     console.log(err);
     return res.status(404).json({ error: 'Domo doesn\'t exist!' });
